@@ -25,16 +25,16 @@
 
 ### About The Plugin
 
-* Support Token authorization from plugin v6.0.0.
-  * Token can be generated automatically with enlighten user and password or with externall tools.
-    * Token generated with enlighten credentials data will be automatically refreshed if expire.
-    * Token generated with externall tools cannot be refreshed automatically if expire.
-* Envoy `password` is detected automatically or can be added in config if was already chenged by user.
-* Installer `password` is generated automatically, only Fw. <= v5.x.x.
+* Supports token authorization (6.0+)
+  * Token can be generated automatically with Enlighten username (email address) and password or with external tools.
+    * Tokens generated with Enlighten credentials data will be automatically refreshed if they expire.
+    * Tokena generated with external tools cannot be refreshed automatically if they expire.
+* Envoy `password` is detected automatically or can be added in the configuration if already changed by user.
+* Installer `password` is generated automaticall (firmware <= v5.x).
 * Envoy `device ID` is detected automatically.
-* Support [Power Production State](https://github.com/grzegorz914/homebridge-enphase-envoy/wiki#power-production-control) and `PLC Level`, Fw. v7.x.x and newer require installer credentials data.
-* For best experiences and display all data please use `Controller` or `EVE` app.
-* Support external integrations, [RESTFul](https://github.com/grzegorz914/homebridge-enphase-envoy?tab=readme-ov-file#restful-integration), [MQTT](https://github.com/grzegorz914/homebridge-enphase-envoy?tab=readme-ov-file#mqtt-integration).
+* Supports [Power Production State](https://github.com/grzegorz914/homebridge-enphase-envoy/wiki#power-production-control) and `PLC Level` (requires firmware v7.0+ and installer credentials).
+* For the best experience and to display all data, please use `Controller` or `EVE` app.
+* Supporta external integrations, [RESTFul](https://github.com/grzegorz914/homebridge-enphase-envoy?tab=readme-ov-file#restful-integration), [MQTT](https://github.com/grzegorz914/homebridge-enphase-envoy?tab=readme-ov-file#mqtt-integration).
 * Supported devices:
   * Firmware `v5.x.x`, `6.x.x`, `v7.x.x`, `v8.x.x`.
   * Envoy `Envoy S`, `IQ Envoy`, `IQ Load Controller`, `IQ Combiner`.
@@ -46,7 +46,7 @@
   * Ensemble/Enpower `IQ System Controller`, `IQ System Controller 2`.
   * WirelessKit `Communications Kit`.
   * Generator
-* Exposed accessory in the native Home app:
+* Exposed accessories in the native Home app:
   * Monitoring Sensors:
     * System `Data Refresh`
     * Production `Power State`, `Power Level`, `Energy State`, `Energy Level`.
@@ -74,8 +74,8 @@
 
 ### Configuration
 
-* Run this plugin as a [Child Bridge](https://github.com/homebridge/homebridge/wiki/Child-Bridges) (Highly Recommended), this prevent crash Homebridge if plugin crashes.
-* Install and use [Homebridge Config UI X](https://github.com/homebridge/homebridge-config-ui-x) to configure this plugin (Highly Recommended).
+* Running this plugin as a [Child Bridge](https://github.com/homebridge/homebridge/wiki/Child-Bridges) is **highly recommended**. This prevents Homebridge from crashing if the plugin crashes.
+* Installation and use of [Homebridge Config UI X](https://github.com/homebridge/homebridge-config-ui-x) to configure this plugin is **highly recommended**.
 * The `sample-config.json` can be edited and used as an alternative for advanced users.
 
 <p align="center">
@@ -84,70 +84,70 @@
 
 | Key | Description |
 | --- | --- |
-| `name` | Here set the accessory `Name` to be displayed in `Homebridge/HomeKit`. |
-| `host` | Here set the envoy `IP Address` or `Hostname`, if not set default path `envoy.local` will be used. For firmware v7.x.x please set `IP Address`. |
-| `envoyFirmware7xx` | This enable support for Envoy Fw. v7.x.x and newer. |
-| `envoyFirmware7xxTokenGenerationMode` | Here select how You wuld to obtain the token, `0 - Enlighten Credentials`, `1 - Your Own Generated Token`. |
-| `envoyPasswd` | Here set the envoy password (only if U already changed the default password) |
-| `envoyToken` | Here set Your own Token only if You select `1 - Your Own Generated Token`. |
-| `envoyTokenInstaller` | If You use Installer token then enable this option. |
-| `envoySerialNumber` | Here set the envoy serial number. |
-| `enlightenUser` | Here set the enlighten user name. |
-| `enlightenPasswd` | Here set the enlighten password. |
-| `supportPowerProductionState` | This enable support for [Power Production State](https://github.com/grzegorz914/homebridge-enphase-envoy/wiki#power-production-control) check, Fw. v7.x.x and newer require installer credentials data. |
-| `powerProductionStateControl` | This is `Power Production Control Tile` for production state control, Fw. v7.x.x and newer require installer credentials data. |
-| `name` | Here set Your own tile name. |
-| `displayType` | Here select the tile type to be displayed in HomeKit app, `0 - None/Disabled`, `1 - Switch`, `2 - Outlet`, `3 - Lightbulb`. |
-| `namePrefix` | This enable the accessory name as a prefix for the tile name. |
-| `supportPlcLevel` | This enable support for `PLC Level Check` for all devices, Fw. v7.x.x and newer require installer credentials data. |
-| `plcLevelControl` | This is `Plc Level Control Tile` for plc level check, Fw. v7.x.x and newer require installer credentials data |
-| `name` | Here set Your own tile name. |
-| `displayType` | Here select the tile type to be displayed in HomeKit app, `0 - None/Disabled`, `1 - Switch`, `2 - Outlet`, `3 - Lightbulb`. |
-| `namePrefix` | This enable the accessory name as a prefix for the tile name. |
-| `powerProductionSummary` | Here set the `Power Summary` in `W` of all microinverters, based on this value HomeKit app will display power level `0-100 %`. |
-| `powerProductionStateSensor` | This is `Power State Sensor` for production monitoring. |
-| `name` | Here set Your own sensor name. |
-| `displayType` | Here select the sensor type to be displayed in HomeKit app, `0 - None/Disabled`, `1 - Motion Sensor`, `2 - Occupancy Sensor`, `3 - Contact Sensor`. |
-| `namePrefix` | This enable the accessory name as a prefix for the sensor name. |
-| `powerProductionLevelSensors` | This is `Power Level Sensor` for production monitoring. |
-| `name` | Here set Your own sensor name. |
-| `compareMode` | Here select the compare mode `<`, `<=`, `==`, `>`, `>=`. |
-| `powerLevel` | Here set power level in `W` to compare at which the sensor fired. |
-| `displayType` | Here select the sensor type to be displayed in HomeKit app, `0 - None/Disabled`, `1 - Motion Sensor`, `2 - Occupancy Sensor`, `3 - Contact Sensor`. |
-| `namePrefix` | This enable the accessory name as a prefix for the sensor name. |
-| `energyProductionStateSensor` | This is `Energy State Sensor` for production monitoring. |
-| `name` | Here set Your own sensor name. |
-| `displayType` | Here select the sensor type to be displayed in HomeKit app, `0 - None/Disabled`, `1 - Motion Sensor`, `2 - Occupancy Sensor`, `3 - Contact Sensor`. |
-| `namePrefix` | This enable the accessory name as a prefix for the sensor name. |
-| `energyProductionLevelSensors` | This is `Energy Level Sensor` for production monitoring. |
-| `name` | Here set Your own sensor name. |
-| `compareMode` | Here select the compare mode `<`, `<=`, `==`, `>`, `>=`. |
-| `energyLevel` | Here set energy level in `Wh` to compare at which the sensor fired. |
-| `displayType` | Here select the sensor type to be displayed in HomeKit app, `0 - None/Disabled`, `1 - Motion Sensor`, `2 - Occupancy Sensor`, `3 - Contact Sensor`. |
-| `namePrefix` | This enable the accessory name as a prefix for the sensor name. |
-| `energyProductionLifetimeOffset` | Here set the `Energy Offset` in `Wh` for production if nedded `+/-`. |
-| `powerConsumptionTotalStateSensor` | This is `Power State Sensor` for consumption `Total` monitoring. |
-| `name` | Here set Your own sensor name. |
-| `displayType` | Here select the sensor type to be displayed in HomeKit app, `0 - None/Disabled`, `1 - Motion Sensor`, `2 - Occupancy Sensor`, `3 - Contact Sensor`. |
-| `namePrefix` | This enable the accessory name as a prefix for the sensor name. |
-| `powerConsumptionTotalLevelSensors` | This is `Power Level Sensor` for consumption `Total` monitoring. |
-| `name` | Here set Your own sensor name. |
-| `compareMode` | Here select the compare mode `<`, `<=`, `==`, `>`, `>=`. |
-| `powerLevel` | Here set power level in `W` to compare at which the sensor fired. |
-| `displayType` | Here select the sensor type to be displayed in HomeKit app, `0 - None/Disabled`, `1 - Motion Sensor`, `2 - Occupancy Sensor`, `3 - Contact Sensor`. |
-| `namePrefix` | This enable the accessory name as a prefix for the sensor name. |
-| `energyConsumptionTotalStateSensor` | This is `Energy State Sensor` for consumption `Total` monitoring. |
-| `name` | Here set Your own sensor name. |
-| `displayType` | Here select the sensor type to be displayed in HomeKit app, `0 - None/Disabled`, `1 - Motion Sensor`, `2 - Occupancy Sensor`, `3 - Contact Sensor`. |
-| `namePrefix` | This enable the accessory name as a prefix for the sensor name. |
-| `energyConsumptionTotalLevelSensors` | This is `Energy Level Sensor` for consumption `Total` monitoring. |
-| `name` | Here set Your own sensor name. |
-| `compareMode` | Here select the compare mode `<`, `<=`, `==`, `>`, `>=`. |
-| `energyLevel` | Here set energy level in `Wh` to compare at which the sensor fired. |
-| `displayType` | Here select the sensor type to be displayed in HomeKit app, `0 - None/Disabled`, `1 - Motion Sensor`, `2 - Occupancy Sensor`, `3 - Contact Sensor`. |
-| `namePrefix` | This enable the accessory name as a prefix for the sensor name. |
-| `energyConsumptionTotalLifetimeOffset` | Here set the `Energy Offset` in `Wh` for consumption `Total` if nedded `+/-`. |
-| `powerConsumptionNetStateSensor` | This is `Power State Sensor` for consumption `Net` monitoring. |
+| `name` | The accessory `Name` to be displayed in `Homebridge/HomeKit`. |
+| `host` | The Envoy Enphase Gateway `IP Address` or `Hostname`. If not supplied, defaults to `envoy.local`. For firmware v7.0+, please set the `IP Address`. |
+| `envoyFirmware7xx` | Enables support for Envoy firmware v7.0+. |
+| `envoyFirmware7xxTokenGenerationMode` | How you will obtain the token, `0 - Enlighten Credentials`, `1 - Your Own Generated Token`. |
+| `envoyPasswd` | Envoy Enphase password (only if U already changed the default password) |
+| `envoyToken` | Your own token only if you selected `1 - Your Own Generated Token`. |
+| `envoyTokenInstaller` | Enable this if you are using the installer token. |
+| `envoySerialNumber` | The Envoy Gateway serial number. |
+| `enlightenUser` | Enlighten username. |
+| `enlightenPasswd` | Enlighten password. |
+| `supportPowerProductionState` | Enable support for checking [Power Production State](https://github.com/grzegorz914/homebridge-enphase-envoy/wiki#power-production-control) (requires firmware v7.0+ and installer credentials). |
+| `powerProductionStateControl` | `Power Production Control Tile` for production state control (requires firmware v7.0+ and installer credentials). |
+| `name` | Envoy accessory name for Home app. |
+| `displayType` | Envoy accessory type for Home app, `0 - None/Disabled`, `1 - Switch`, `2 - Outlet`, `3 - Lightbulb`. |
+| `namePrefix` | Accessory prefix for Envoy. |
+| `supportPlcLevel` | Enables support for `PLC Level Check` for all devices (requires firmware v7.0+ and installer credentials). |
+| `plcLevelControl` | `PLC Level Control Tile` for PLC level check (requires firmware v7.0+ and installer credentials). |
+| `name` | PLC accessory name for Home app. |
+| `displayType` | PLC accessory type to be displayed in Home app, `0 - None/Disabled`, `1 - Switch`, `2 - Outlet`, `3 - Lightbulb`. |
+| `namePrefix` | Accessory prefix for the PLC. |
+| `powerProductionSummary` | `Power Summary`, in `W`, of all microinverters. This will be used to calculate the display power level in the Home app `0-100 %`. |
+| `powerProductionStateSensor` | `Power State Sensor` for production monitoring. |
+| `name` | Production state sensor accessory name for Home app. |
+| `displayType` | Production state sensor accessory type displayed in Home app, `0 - None/Disabled`, `1 - Motion Sensor`, `2 - Occupancy Sensor`, `3 - Contact Sensor`. |
+| `namePrefix` | Accessory prefix for the the production state sensor. |
+| `powerProductionLevelSensors` | `Power Level Sensor` for production monitoring. |
+| `name` | Power level sensor accessory name for Home app. |
+| `compareMode` | Power level comparison mode `<`, `<=`, `==`, `>`, `>=`. |
+| `powerLevel` | Power level in `W` to compare to sensor that was triggered. |
+| `displayType` | Power level sensor accessory type to be displayed in Home app, `0 - None/Disabled`, `1 - Motion Sensor`, `2 - Occupancy Sensor`, `3 - Contact Sensor`. |
+| `namePrefix` | Accessory prefix for the power level sensor. |
+| `energyProductionStateSensor` | `Energy State Sensor` for production monitoring. |
+| `name` | Energy state sensor accessory name for Home app. |
+| `displayType` | Energy state sensor accessory type to be displayed in Home app, `0 - None/Disabled`, `1 - Motion Sensor`, `2 - Occupancy Sensor`, `3 - Contact Sensor`. |
+| `namePrefix` | Accessory prefix for the energy state sensor. |
+| `energyProductionLevelSensors` | `Energy Level Sensor` for production monitoring. |
+| `name` | Energy level sensor accessory name for Home app. |
+| `compareMode` | Energy level comparison mode `<`, `<=`, `==`, `>`, `>=`. |
+| `energyLevel` | Energy level in `Wh` to compare to sensor that was triggered. |
+| `displayType` | Energy level sensor accessory type to be displayed in Home app, `0 - None/Disabled`, `1 - Motion Sensor`, `2 - Occupancy Sensor`, `3 - Contact Sensor`. |
+| `namePrefix` | Accessory prefix for the energy level sensor. |
+| `energyProductionLifetimeOffset` | `Energy Offset` in `Wh` for production (if needed) `+/-`. |
+| `powerConsumptionTotalStateSensor` | `Power State Sensor` for `Total` consumption monitoring. |
+| `name` | Power state sensor accessory name for Home app. |
+| `displayType` | Power state sensor accessory type to be displayed in Home app, `0 - None/Disabled`, `1 - Motion Sensor`, `2 - Occupancy Sensor`, `3 - Contact Sensor`. |
+| `namePrefix` | Accessory prefix for the power state sensor. |
+| `powerConsumptionTotalLevelSensors` | `Power Level Sensor` for `Total` consumption monitoring. |
+| `name` | Power consumption level sensor accessory name for Home app. |
+| `compareMode` | Power consumptionlevel sensor comparison mode `<`, `<=`, `==`, `>`, `>=`. |
+| `powerLevel` | Power consumption level in `W` to compare to power level sensor that was triggered. |
+| `displayType` | Power consumption level sensor accessory type to be displayed in Home app, `0 - None/Disabled`, `1 - Motion Sensor`, `2 - Occupancy Sensor`, `3 - Contact Sensor`. |
+| `namePrefix` | Accessory prefix for the power consumption level sensor. |
+| `energyConsumptionTotalStateSensor` | `Energy State Sensor` for `Total` consumption monitoring. |
+| `name` | Energy consumption total sensor name in Home app. |
+| `displayType` | Energy consumption total sensor accessory type to be displayed in Home app, `0 - None/Disabled`, `1 - Motion Sensor`, `2 - Occupancy Sensor`, `3 - Contact Sensor`. |
+| `namePrefix` | Accessory prefix for the energy consumption total sensor. |
+| `energyConsumptionTotalLevelSensors` | `Energy Level Sensor` for `Total` consumption monitoring. |
+| `name` | Energy level total sensor name for Home app. |
+| `compareMode` | Energy level total sensor comparison mode `<`, `<=`, `==`, `>`, `>=`. |
+| `energyLevel` | Energy level total in `Wh` to compare to sensor that was triggered. |
+| `displayType` | Energy level total sensor accessory type to be displayed in Home app, `0 - None/Disabled`, `1 - Motion Sensor`, `2 - Occupancy Sensor`, `3 - Contact Sensor`. |
+| `namePrefix` | Accessory prefix for the Energy level total sensor. |
+| `energyConsumptionTotalLifetimeOffset` | `Energy Offset` in `Wh` for consumption `Total` (if needed) `+/-`. |
+| `powerConsumptionNetStateSensor` | `Power State Sensor` for `Net` consumption monitoring. |
 | `name` | Here set Your own sensor name. |
 | `displayType` | Here select the sensor type to be displayed in HomeKit app, `0 - None/Disabled`, `1 - Motion Sensor`, `2 - Occupancy Sensor`, `3 - Contact Sensor`. |
 | `namePrefix` | This enable the accessory name as a prefix for the sensor name. |
